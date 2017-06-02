@@ -17,10 +17,6 @@ matrix:
     - rvm: ruby-head
     - rvm: rubinius-3
 before_install:
-  - rvm use @global
-  - gem uninstall bundler -x
-  - rvm use @default
-  - gem install bundler --version=1.13.7
   - bundler --version
   - sudo apt-get -qq update
   - sudo apt-get install -y libgirepository1.0-dev gobject-introspection gir1.2-gtop-2.0
