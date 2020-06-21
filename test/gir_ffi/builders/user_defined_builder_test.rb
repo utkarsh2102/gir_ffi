@@ -460,6 +460,20 @@ describe GirFFI::Builders::UserDefinedBuilder do
       end
     end
 
+    describe "when defining a vfunc with a return value" do
+      let(:base_class) { Regress::TestObj }
+      let(:info) do
+        GirFFI::UserDefinedObjectInfo.new derived_class do |it|
+          it.install_vfunc_implementation :matrix, ->(obj, *_args) { 44 }
+        end
+      end
+
+      it "allows the vfunc to be called through its invoker" do
+        obj = derived_class.new
+        _(obj.do_matrix("bar")).must_equal 44
+      end
+    end
+
     describe "when using a default vfunc implementation" do
       let(:base_class) { Regress::TestObj }
       let(:info) do
